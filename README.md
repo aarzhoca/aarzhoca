@@ -16,7 +16,7 @@ I²C/SPI/UART/USB/SDIO/**MIPI-CSI**/I²S/PDM · **BLE/Wi-Fi** · **TFLM/ESP-NN**
 ### 🔗 Links
 - 🌐 Notes & posts: **https://github.com/aarzhoca/aarzhoca.github.io**
 - 🥽 OpenGlass reference: **https://github.com/BasedHardware/OpenGlass**
-- 📦 EdgeGlass-ML repo: *(pin this repo once you push it!)*
+- 📦 EdgeGlass-ML repo: **https://github.com/aarzhoca/edgeglass-ml**
 
 ---
 
