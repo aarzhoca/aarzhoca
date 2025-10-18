@@ -1,0 +1,105 @@
+name: Update dashboard
+
+on:
+  schedule:
+    - cron: "22 5 * * *"   # daily 05:22 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Update README sections
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: aarzhoca
+          FEED_URL: https://aarzhoca.github.io/feed.xml   # change or leave blank if no feed
+        run: |
+          python - <<'PY'
+          import os, re, datetime, xml.etree.ElementTree as ET
+          from pathlib import Path
+          import requests
+
+          USER   = os.environ["GITHUB_USER"]
+          TOKEN  = os.environ["GH_TOKEN"]
+          FEED   = os.environ.get("FEED_URL","").strip()
+
+          readme = Path("README.md")
+          text = readme.read_text(encoding="utf-8")
+
+          # ---- Recent work (edgeglass-ml commits)
+          headers = {"Authorization": f"Bearer {TOKEN}"}
+          items = []
+          r = requests.get(f"https://api.github.com/repos/{USER}/edgeglass-ml/commits", headers=headers, timeout=20)
+          if r.ok:
+            for c in r.json()[:5]:
+              msg = c["commit"]["message"].splitlines()[0]
+              sha = c["sha"][:7]
+              url = c["html_url"]
+              dt  = c["commit"]["committer"]["date"][:10]
+              items.append(f"- {dt} · `{sha}` · {msg} ([link]({url}))")
+          work_block = "\n".join(items) if items else "- _No recent commits_"
+
+          text = re.sub(
+            r"(?s)<!--RECENT_WORK:START-->.*?<!--RECENT_WORK:END-->",
+            f"<!--RECENT_WORK:START-->\n{work_block}\n<!--RECENT_WORK:END-->",
+            text,
+          )
+
+          # ---- Latest posts (RSS/Atom)
+          posts_block = "- _No recent posts_"
+          if FEED:
+            try:
+              resp = requests.get(FEED, timeout=20)
+              if resp.ok:
+                root = ET.fromstring(resp.content)
+                entries = root.findall("{http://www.w3.org/2005/Atom}entry") or root.findall("channel/item")
+                lines = []
+                for e in entries[:5]:
+                  title = (e.findtext("{http://www.w3.org/2005/Atom}title") or e.findtext("title") or "Post").strip()
+                  link = None
+                  link_el = e.find("{http://www.w3.org/2005/Atom}link")
+                  if link_el is not None and "href" in link_el.attrib:
+                    link = link_el.attrib["href"]
+                  link = link or (e.findtext("link") or "").strip()
+                  date = (e.findtext("{http://www.w3.org/2005/Atom}updated") or e.findtext("pubDate") or "")[:10]
+                  lines.append(f"- {date} · [{title}]({link})")
+                if lines:
+                  posts_block = "\n".join(lines)
+            except Exception:
+              pass
+
+          text = re.sub(
+            r"(?s)<!--LATEST_POSTS:START-->.*?<!--LATEST_POSTS:END-->",
+            f"<!--LATEST_POSTS:START-->\n{posts_block}\n<!--LATEST_POSTS:END-->",
+            text,
+          )
+
+          readme.write_text(text, encoding="utf-8")
+          print("README updated.")
+          PY
+
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore(dashboard): auto-refresh recent work & posts"
+            git push
+          else
+            echo "No changes."
+          fi
