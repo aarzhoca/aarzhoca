@@ -11,10 +11,15 @@ I build low-power, resource-constrained systems: ESP32-S3 smart glasses, TinyML 
 
 ## 🔧 Recent work
 <!--RECENT_WORK:START-->
+- 2025-10-17 · `4d43759` · TinyML demo: TFLM int8 embeddings + ESP32-S3 board notes (#1) ([link](https://github.com/aarzhoca/edgeglass-ml/commit/4d43759844790e2cfb72a9a5310a9c327f1a4d07))
+- 2025-10-17 · `39b9009` · feat: initial EdgeGlass-ML scaffold ([link](https://github.com/aarzhoca/edgeglass-ml/commit/39b9009525d9965ff1f900db699d3475041bf040))
 <!--RECENT_WORK:END-->
 
 ## 📝 Latest notes
 <!--LATEST_POSTS:START-->
+- 2025-09-18 · [AI-Assist in Firmware: Guardrails that Actually Work](https://aarzhoca.github.io/posts/ai-assist-firmware-guardrails/)
+- 2025-09-18 · [Firmware-in-the-Loop Packet Telemetry (MCU + SBC Classifier)](https://aarzhoca.github.io/posts/fil-packet-telemetry/)
+- 2025-09-18 · [Deterministic TinyML on Zephyr: DMA, ISR, and Cache Pitfalls](https://aarzhoca.github.io/posts/tinyml-zephyr-anomaly/)
 <!--LATEST_POSTS:END-->
 
 ### 🧰 Tech Stack
