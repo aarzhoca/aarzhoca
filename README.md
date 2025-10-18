@@ -9,6 +9,14 @@ I build low-power, resource-constrained systems: ESP32-S3 smart glasses, TinyML 
 - 🩺 **Wearable Medical Firmware** — BLE telemetry + DFU/OTA aligned with **IEC 62304 / ISO 13485**.  
 - ⚡ **Power & Telemetry Tooling** — Python benches (**pyserial/pyvisa**) for current profiling & KPI dashboards.
 
+## 🔧 Recent work
+<!--RECENT_WORK:START-->
+<!--RECENT_WORK:END-->
+
+## 📝 Latest notes
+<!--LATEST_POSTS:START-->
+<!--LATEST_POSTS:END-->
+
 ### 🧰 Tech Stack
 `C/C++` · **FreeRTOS/Zephyr** · **Embedded Linux** · **U-Boot/device tree** · ARM Cortex-M/A · **ESP32-S3** · **Zynq (PS/PL)** ·  
 I²C/SPI/UART/USB/SDIO/**MIPI-CSI**/I²S/PDM · **BLE/Wi-Fi** · **TFLM/ESP-NN** · int8 quantization · CI (**Jenkins/GitLab**) · Python (**pytest/pyserial/pyvisa**)
