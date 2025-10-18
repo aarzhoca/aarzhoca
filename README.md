@@ -1,4 +1,4 @@
-# Hi, I'm Aaron (aarzhoca) 👋
+# Hi, I'm Aaron Zhou 👋
 
 **Embedded ML • XR Wearables • Firmware Leadership**  
 I build low-power, resource-constrained systems: ESP32-S3 smart glasses, TinyML (**TFLM/ESP-NN**), BLE streaming, OTA/DFU, and camera/IMU bring-up. Ph.D. in advanced control; led embedded teams at Lumentum, Smart Wires, and Varentec.
