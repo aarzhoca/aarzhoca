@@ -17,6 +17,7 @@ I build low-power, resource-constrained systems: ESP32-S3 smart glasses, TinyML 
 
 ## 📝 Latest notes
 <!--LATEST_POSTS:START-->
+- 2025-10-24 · [Openbmc manageability pack &amp; Hobby Project](https://aarzhoca.github.io/posts/openbmc-manageability-pack/) 
 - 2025-10-23 · [VR Wrist EMG Interface &amp; System Lab — Hobby Project](https://aarzhoca.github.io/posts/vr-wrist-emg-lab/)
 - 2025-09-18 · [AI-Assist in Firmware: Guardrails that Actually Work](https://aarzhoca.github.io/posts/ai-assist-firmware-guardrails/)
 - 2025-09-18 · [Firmware-in-the-Loop Packet Telemetry (MCU + SBC Classifier)](https://aarzhoca.github.io/posts/fil-packet-telemetry/)
